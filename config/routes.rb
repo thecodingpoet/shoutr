@@ -5,11 +5,11 @@ Rails.application.routes.draw do
 
 
   root 'homes#show'
-  resources :shouts, only: [:create]
+  resources :shouts, only: [:create, :show]
   resources :passwords, controller: "clearance/passwords", only: [:create, :new]
   resource :session, controller: "sessions", only: [:create]
 
-  resources :users, only: [:create] do
+  resources :users, only: [:create, :show] do
     resource :password,
       controller: "clearance/passwords",
       only: [:create, :edit, :update]
