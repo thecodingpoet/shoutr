@@ -1,6 +1,7 @@
 class Shout < ApplicationRecord
   belongs_to :user
-  validates :body, presence: true, length: {minimum:1, maximum:144}
+  belongs_to :content, polymorphic: true
+
   validates :user, presence: true
 
   default_scope { order(created_at: :desc) }

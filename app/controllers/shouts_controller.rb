@@ -10,15 +10,23 @@ class ShoutsController < ApplicationController
 
   private
 
+  def shouts_params
+    { content: content_from_params }
+  end
+
+  def content_from_params
+    TextShout.new(content_params)
+  end
+
+  def content_params 
+    params.require(:shout).require(:content).permit(:body)
+  end
+
   def redirect_options_for(shout)
     if shout.persisted?
       { notice: "Shouted Successfully" }
     else 
       { alert: "Could not shout"}
     end
-  end
-
-  def shouts_params
-    params.require(:shout).permit(:body)
   end
 end
